@@ -16,17 +16,19 @@ class SlimeHoneyPlacer
     }
 
     public static void prettyPrintGrid(int[][] grid, int h, int w) {
-        // Red
         String ESC = "\u001b[";
         String block = "██";
-        String red = ESC + "0;31m";
-        String black = ESC + "0;30m";
-        String purple = ESC + "0;35m";
-        String reset = ESC + "0m";
+        String black    = ESC + "0;30m";
+        String red      = ESC + "0;31m";
+        String green    = ESC + "0;32m";
+        String yellow   = ESC + "0;33m";
+        String purple   = ESC + "0;35m";
 
         String colorGood = purple + block + reset;
         String colorBad = black + block + reset;
         String colorNeutral = reset + block + reset;
+        String colorSlime = green + block + reset;
+        String colorHoney = yellow + block + reset;
         for ( int i = 0 ; i < h ; i++ ) {
             for ( int j = 0 ; j < h ; j++ ) {
                 switch(grid[i][j]) {
@@ -38,6 +40,12 @@ class SlimeHoneyPlacer
                         break;
                     case 2:
                         System.out.print(colorBad);
+                        break;
+                    case 3:
+                        System.out.print(colorSlime);
+                        break;
+                    case 4:
+                        System.out.print(colorHoney);
                         break;
                     default:
                         System.out.print("!");
