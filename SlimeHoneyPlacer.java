@@ -6,6 +6,16 @@ import java.lang.Math;
  
 class SlimeHoneyPlacer
 {
+    static final int MAX_SEGMENT_SIZE = 12;
+    static final int MIN_LINE_LENGTH = 3;
+
+    // What values of the grid correspond to
+    static final int CAN_COVER = 0;
+    static final int NEED_TO_COVER = 1;
+    static final int CANT_COVER = 2;
+    static final int SLIME = 3;
+    static final int HONEY = 4;
+
     public static void main(String args[])
     {
         // Gotten from ilmango video including 1 space around perimeter
@@ -14,6 +24,7 @@ class SlimeHoneyPlacer
         int[][] grid = genTestGrid(h,w);
         prettyPrintGrid(grid, h, w);
     }
+
 
     public static void prettyPrintGrid(int[][] grid, int h, int w) {
         String ESC = "\u001b[";
@@ -33,23 +44,23 @@ class SlimeHoneyPlacer
         for ( int i = 0 ; i < h ; i++ ) {
             for ( int j = 0 ; j < h ; j++ ) {
                 switch(grid[i][j]) {
-                    case 0:
+                    case CAN_COVER:
                         System.out.print(colorNeutral);
                         break;
-                    case 1:
+                    case NEED_TO_COVER:
                         System.out.print(colorGood);
                         break;
-                    case 2:
+                    case CANT_COVER:
                         System.out.print(colorBad);
                         break;
-                    case 3:
+                    case SLIME:
                         System.out.print(colorSlime);
                         break;
-                    case 4:
+                    case HONEY:
                         System.out.print(colorHoney);
                         break;
                     default:
-                        System.out.print("!");
+                        System.out.print("!!");
                 }
             }
             System.out.println("");
@@ -70,17 +81,17 @@ class SlimeHoneyPlacer
                     randVal = Math.random();
                     if ( randVal < 0.1 ) {
                         // Doesn't matter
-                        grid[i][j] = 0;
+                        grid[i][j] = CAN_COVER;
                     } else if ( randVal < 0.4 )  {
                         // Can't be covered
-                        grid[i][j] = 2;
+                        grid[i][j] = CANT_COVER;
                     } else {
                         // Needs to be covered
-                        grid[i][j] = 1;
+                        grid[i][j] = NEED_TO_COVER;
                     }
                 } else { 
                     // Outside of square set free
-                    grid[i][j] = 0;
+                    grid[i][j] = CAN_COVER;
                 }
             } // Loop over second index
         } // Loop over first index
