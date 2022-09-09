@@ -23,6 +23,7 @@ class SlimeHoneyPlacer
         String green    = ESC + "0;32m";
         String yellow   = ESC + "0;33m";
         String purple   = ESC + "0;35m";
+        String reset    = ESC + "0m";
 
         String colorGood = purple + block + reset;
         String colorBad = black + block + reset;
